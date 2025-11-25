@@ -42,7 +42,7 @@
 
 <h1>GPT Prompt Tester</h1>
 
-<p>This tool lets you test custom system prompts + user prompts with your own API key.</p>
+<p>This tool lets you test custom system prompts + user prompts using the OpenAI Responses API.</p>
 
 <h2>🔑 Enter OpenAI API Key</h2>
 <input type="password" id="apiKey" placeholder="Enter your OpenAI API key…">
@@ -84,14 +84,13 @@ async function runPrompt() {
         return;
     }
 
-    // Build messages (OpenAI Responses API)
+    // Build payload WITHOUT temperature (GPT-5-nano forbids it)
     const payload = {
         model: model,
         input: [
             { role: "system", content: systemPrompt },
             { role: "user", content: userPrompt }
-        ],
-        temperature: 0.7
+        ]
     };
 
     let responseText = "";
